@@ -19,10 +19,21 @@ if st.button("🔍 Find Suggestions") and query:
     if mode == "🔤 Autocomplete":
         with st.spinner("Getting suggestions..."):
             # Build if binaries not yet compiled
-            if not os.path.exists("autocomplete"):
-                subprocess.run(["g++", "autocomplete.cpp", "-o", "autocomplete"])
-                subprocess.run(["chmod", "+x", "autocomplete"])
-            subprocess.run(["./autocomplete"])
+            # if not os.path.exists("autocomplete"):
+            #     subprocess.run(["g++", "autocomplete.cpp", "-o", "autocomplete"])
+            #     subprocess.run(["chmod", "+x", "autocomplete"])
+            # subprocess.run(["./autocomplete"])
+            try:
+                if not os.path.exists("autocorrect"):
+                    subprocess.run(["g++", "autocorrect.cpp", "-o", "autocorrect"], check=True)
+                    subprocess.run(["chmod", "+x", "autocorrect"], check=True)
+                
+                subprocess.run(["./autocorrect"], check=True)
+            
+            except PermissionError:
+                st.error("Permission denied when executing './autocorrect'. This may happen on Streamlit Cloud. Try running locally or rewrite the logic in Python.")
+            except subprocess.CalledProcessError as e:
+                st.error(f"Subprocess failed: {e}")
     else:
         with st.spinner("Getting suggestions..."):
             # Build if binaries not yet compiled
