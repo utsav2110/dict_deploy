@@ -17,14 +17,17 @@ if st.button("🔍 Find Suggestions") and query:
 
     if mode == "🔤 Autocomplete":
         with st.spinner("Getting suggestions..."):
-            # subprocess.run(["./autocomplete"])
-            subprocess.run(["bash", "autocomplete"])
+            # Build if binaries not yet compiled
+            if not os.path.exists("autocomplete"):
+                subprocess.run(["g++", "autocomplete.cpp", "-o", "autocomplete"])
+            subprocess.run(["./autocomplete"])
     else:
         with st.spinner("Getting suggestions..."):
-            # subprocess.run(["./autocorrect"])
-            subprocess.run(["bash", "autocorrect"])
-
-
+            # Build if binaries not yet compiled
+            if not os.path.exists("autocorrect"):
+                subprocess.run(["g++", "autocorrect.cpp", "-o", "autocorrect"])
+            subprocess.run(["./autocorrect"])
+                
     # Read suggestions
     try:
         with open("suggestions.txt", "r") as f:
