@@ -17,10 +17,10 @@ if st.button("🔍 Find Suggestions") and query:
 
     if mode == "🔤 Autocomplete":
         with st.spinner("Getting suggestions..."):
-            subprocess.run(["autocomplete.exe"])  
+            subprocess.run(["./autocomplete"])  
     else:
         with st.spinner("Getting suggestions..."):
-            subprocess.run(["autocorrect.exe"])
+            subprocess.run(["./autocorrect"])
 
     # Read suggestions
     try:
