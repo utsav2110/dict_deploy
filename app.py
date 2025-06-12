@@ -21,12 +21,14 @@ if st.button("🔍 Find Suggestions") and query:
             # Build if binaries not yet compiled
             if not os.path.exists("autocomplete"):
                 subprocess.run(["g++", "autocomplete.cpp", "-o", "autocomplete"])
+                subprocess.run(["chmod", "+x", "autocomplete"])
             subprocess.run(["./autocomplete"])
     else:
         with st.spinner("Getting suggestions..."):
             # Build if binaries not yet compiled
             if not os.path.exists("autocorrect"):
                 subprocess.run(["g++", "autocorrect.cpp", "-o", "autocorrect"])
+                subprocess.run(["chmod", "+x", "autocorrect"])
             subprocess.run(["./autocorrect"])
                 
     # Read suggestions
